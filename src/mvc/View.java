@@ -5,7 +5,7 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class View extends JPanel implements PropertyChangeListener {
+public abstract class View extends JPanel implements PropertyChangeListener {
 
     protected Model model;
 
@@ -22,25 +22,8 @@ public class View extends JPanel implements PropertyChangeListener {
         repaint();
     }
 
-    public void paintComponent(Graphics gc) {
-        super.paintComponent(gc);
-        Color oldColor = gc.getColor();
-        for (int i = 0; i < model.getPath().size(); i++) {
-            gc.setColor(model.getPath().get(i).getColor());
-            Point startPoint = model.getPath().get(i).getStartPoint();
-            Point endPoint = model.getPath().get(i).getEndPoint();
-            gc.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
-        }
-        if (model.isPen()) {
-            gc.setColor(model.getColor());
-            gc.fillOval(model.getLocation().x - 2, model.getLocation().y - 2, 4, 4);
-        } else {
-            gc.setColor(Color.BLACK);
-            gc.drawOval(model.getLocation().x - 2, model.getLocation().y - 2, 4, 4);
-        }
-        gc.setColor(oldColor);
-    }
-
+    public abstract void paintComponent(Graphics gc);
+    
     @Override
     public void propertyChange(PropertyChangeEvent arg0) {
         repaint();
