@@ -1,4 +1,4 @@
-package src.mvc;
+package mvc;
 
 public abstract class Command {
 

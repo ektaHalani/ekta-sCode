@@ -1,4 +1,4 @@
-package src.mvc;
+package mvc;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;

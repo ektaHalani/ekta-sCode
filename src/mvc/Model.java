@@ -1,4 +1,4 @@
-package src.mvc;
+package mvc;
 
 //import tools.*;
 
@@ -11,6 +11,21 @@ public abstract class Model extends Bean {
     private Boolean unsavedChanges = false;
     private String fileName = null;
 
-    public abstract void changed();
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String newFileName) {
+        fileName = newFileName;
+    }
+
+    public void changed() {
+        firePropertyChange("unsavedChanges", unsavedChanges, true);
+        unsavedChanges = true;
+    }
+
+    public void saved() {
+        unsavedChanges = false;
+    }
 
 }

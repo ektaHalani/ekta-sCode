@@ -1,4 +1,4 @@
-package src.mvc;
+package mvc;
 
 import java.beans.*;
 import java.io.*;

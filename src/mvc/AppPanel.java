@@ -1,4 +1,4 @@
-package src.mvc;
+package mvc;
 
 
 
@@ -89,25 +89,22 @@ public class AppPanel extends JPanel implements ActionListener, PropertyChangeLi
     public void actionPerformed(ActionEvent ae) {
         try {
             String cmmd = ae.getActionCommand();
-            if (cmmd == "Save") {
-                try {
+            if (cmmd == "Save") {;
+                ObjectOutputStream os;
+                if (model.getFileName() != null) {
+                    os = new ObjectOutputStream(new FileOutputStream(model.getFileName()));
+                } else {
                     String fName = Utilities.getFileName(null, false);
-                    ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fName));
-                    os.writeObject(model);
-                    os.close();
-                } catch (Exception err) {
-                    Utilities.error(err);
+                    os = new ObjectOutputStream(new FileOutputStream(fName));
                 }
+                os.writeObject(model);
+                os.close();
             } else if (cmmd == "Open") {
-                try {
-                    String fName = Utilities.getFileName(null, true);
-                    ObjectInputStream is = new ObjectInputStream(new FileInputStream(fName));
-                    model = (Model) is.readObject();
-                    view.setModel(model);
-                    is.close();
-                } catch (Exception err) {
-                    Utilities.error(err.getMessage());
-                }
+                String fName = Utilities.getFileName(null, true);
+                ObjectInputStream is = new ObjectInputStream(new FileInputStream(fName));
+                model = (Model) is.readObject();
+                view.setModel(model);
+                is.close();
             } else if (cmmd == "New") {
                 setModel(factory.makeModel());
                 view.setModel(model);

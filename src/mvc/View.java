@@ -1,4 +1,4 @@
-package src.mvc;
+package mvc;
 
 import javax.swing.JPanel;
 import java.awt.*;
@@ -22,8 +22,10 @@ public abstract class View extends JPanel implements PropertyChangeListener {
         repaint();
     }
 
-    public abstract void paintComponent(Graphics gc);
-    
+    public void paintComponent(Graphics gc) {
+        super.paintComponent(gc);
+    }
+
     @Override
     public void propertyChange(PropertyChangeEvent arg0) {
         repaint();
